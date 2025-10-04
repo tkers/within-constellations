@@ -152,6 +152,9 @@ p.flash {
   color: #ffd07f;
   animation: pulse 1.4s ease-in-out infinite;
 }
+section:not(:last-child) p.flash {
+  animation: none;
+}
 
 p.fin {
   color: #7c8f88;
