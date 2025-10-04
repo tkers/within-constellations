@@ -13,13 +13,27 @@ function newSection() {
   rootContainer.appendChild(currentSection)
 }
 
-function addParagraph(html) {
+function smartQuotes(str) {
+  return str.replace(/"([^"]*)"/g, '“$1”').replace(/'([^']*)'/g, '‘$1’')
+}
+
+function addParagraph(html, tags) {
   const paragraphElement = document.createElement('p')
-  paragraphElement.innerHTML = html
+  paragraphElement.innerHTML = smartQuotes(html)
+  if (tags.includes('system')) paragraphElement.classList.add('system')
+  if (tags.includes('flash')) paragraphElement.classList.add('flash')
+  if (tags.includes('fin')) {
+    paragraphElement.classList.add('fin')
+    delay += 2400
+  }
   currentSection.appendChild(paragraphElement)
 
   showAfter(delay, paragraphElement)
   delay += 160
+
+  if (tags.includes('pause')) {
+    delay += 1200
+  }
 
   return paragraphElement
 }
@@ -27,7 +41,7 @@ function addParagraph(html) {
 function addChoice(html, onclick) {
   const choiceAnchorEl = document.createElement('a')
   choiceAnchorEl.classList.add('choice')
-  choiceAnchorEl.innerHTML = html
+  choiceAnchorEl.innerHTML = smartQuotes(html)
   choiceAnchorEl.addEventListener('click', (evt) => {
     evt.preventDefault()
     onclick()
@@ -80,7 +94,7 @@ function continueStory(story) {
   newSection()
   while (story.canContinue) {
     // story.currentTags
-    addParagraph(story.Continue())
+    addParagraph(story.Continue(), story.currentTags || [])
   }
 
   story.currentChoices.forEach((choice) => {
@@ -145,7 +159,7 @@ function init() {
   // })
 
   const savestate = window.localStorage.getItem(SAVESTATE_KEY)
-  if (savestate) {
+  if (savestate && false) {
     askToResume(savestate)
   } else {
     continueStory(story)

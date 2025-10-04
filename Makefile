@@ -1,7 +1,7 @@
 .PHONY: clean all build run
 all: build
 
-INK=src/intercept.ink
+INK=src/within-constellations.ink
 JSON=tmp/story.json
 JS=docs/story.js
 
