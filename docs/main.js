@@ -34,6 +34,9 @@ function addParagraph(html, tags) {
   if (tags.includes('pause')) {
     delay += 1200
   }
+  if (tags.includes('pause-long')) {
+    delay += 1800
+  }
 
   return paragraphElement
 }
