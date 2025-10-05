@@ -24,12 +24,25 @@ function addParagraph(html, tags) {
   if (tags.includes('flash')) paragraphElement.classList.add('flash')
   if (tags.includes('fin')) {
     paragraphElement.classList.add('fin')
-    delay += 2400
+    delay += 2800
   }
   currentSection.appendChild(paragraphElement)
 
   showAfter(delay, paragraphElement)
   delay += 160
+
+  if (tags.includes('ticker')) {
+    const fullText = paragraphElement.innerHTML.slice(0, -1)
+    let i = 1
+    const tick = () => {
+      paragraphElement.innerHTML = fullText + '.'.repeat(i)
+      if (i++ < 3) {
+        setTimeout(tick, 1400)
+      }
+    }
+    setTimeout(tick, 1400 + delay)
+    delay += 1400 * 3
+  }
 
   if (tags.includes('pause')) {
     delay += 1200
@@ -46,8 +59,10 @@ function addChoice(html, onclick) {
   choiceAnchorEl.classList.add('choice')
   choiceAnchorEl.innerHTML = smartQuotes(html)
   choiceAnchorEl.addEventListener('click', (evt) => {
-    evt.preventDefault()
-    onclick()
+    if (choiceAnchorEl.classList.contains('show')) {
+      evt.preventDefault()
+      onclick()
+    }
   })
 
   currentSection.appendChild(choiceAnchorEl)

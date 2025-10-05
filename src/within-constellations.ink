@@ -5,7 +5,6 @@
 CONST captain = "Captain Holloway"
 CONST shipname = "VSS Orion"
 
-VAR reactor_failing = false
 VAR exposure = 0
 
 -> start
@@ -25,11 +24,11 @@ Before long, you make it to the end of the corridor, where a large bulkhead sepa
 A small keypad lights up the wall around it.
 
 * [Open pod bay doors]
-   › Override lockdown? #system #flash #pause   
+   > Override lockdown? #system #flash #pause
    You reach for the keypad <>
 * [Check for other survivors]
-   › Retrieving crew status... #system #pause
-   › [ERR] Failed to connect. #system #flash #pause   
+   > Retrieving crew status... #system #pause
+   > [ERR] Failed to connect. #system #flash #pause   
    Your fingers quickly move back to the keys <>
    
 - and enter your access codes. The panel buzzes briefly, and the bulkhead in front of you slowly opens, allowing you to pass.
@@ -54,16 +53,15 @@ Away from your home. #pause
    You search the pod, finding some basic supplies.
 
 - {safe_for_now: -> ship_explodes}
-- (safe_for_now) You're safe, for now, but you need to think fast.
--> just_escaped
+- (safe_for_now) You're safe, for now, but you need to think fast. -> just_escaped
 
 == ship_explodes ==
 Before you get the chance to do anything else, a blinding light floods the pod. Your eyes start tearing, and it takes a while before you manage to open them again.
 
-You take a look outside of the viewport, and watch in horror as your ship is consumed by a cold, white flash. The reactor core is gone, and with it, everything in its vicinity.
+You take a look outside of the viewport, and watch in horror as your ship is consumed by a cold, white flare. The reactor core is burning, and with it, everything in its vicinity.
 
 * Your crew[]! Did anyone else make it out in time?
-- It all happened so fast, but you can't be the only one who managed to reach the escape pods. Can you?
+- It all happened so fast, but you can't be the only one who managed to reach the escape pods, can you?
 
 Green lights around the control panel indicate that your comms array is fully operational. If there are any survivors out there, you should be able to reach them.
 -> search_crew 
@@ -75,16 +73,16 @@ Green lights around the control panel indicate that your comms array is fully op
    -> proximity_scan
 
 === proximity_scan ===
-› Running proximity scan... #system #pause-long
-› Anomaly detected. #system #flash #pause
+> Running proximity scan... #system #pause-long
+> Anomaly detected. #system #flash #pause
 An anomaly? That doesn't sound good. Still, it could be another escape pod–either too damaged or far away to recognise.
 If any of your crew is still alive, you should try to reach them. The odds of survival by yourself are close to zero. But together, maybe you have a chance.
 * [Try to hail them]
    You flick the switch to open a communication channel.
    -> radio
 * [Don't risk it]
-   Now's not the time to make hasty decisions. You're no use to anyone if you're dead.
-   -> lost_crew
+   Now's not the time to make hasty decisions. You have no idea what you're up against, so staying hidden is your only hope.
+   -> alone
 
 === activate_radio ===
 As your finger hovers over the switch, a cold shiver runs down your spine. Whatever destroyed your ship is still out there. Is it listening? Waiting for me to reveal my location?
@@ -97,34 +95,101 @@ As your finger hovers over the switch, a cold shiver runs down your spine. Whate
 
 === radio ===
 ~exposure++
-› Comms online. #system
-› Transmitting... #system #flash #pause
+> Comms online. #system
+> Transmitting... #system #flash #pause
 "Hello," you start nervously, but you manage to collect yourself quickly, "this is {captain} of the {shipname}. Does anoyone copy?" #pause-long
 * [Try again]
-   "This is {captain}," you declare once again, "is anyone out there?" #pause-long
+   "This is {captain}," you announce once again, "is anyone out there?" #pause-long
 * [Boost signal]
    ~exposure++
-   › Range expanded. #system #pause
-   › Transmitting... #system #flash #pause
+   > Range expanded. #system #pause
+   > Transmitting... #system #flash #pause
    "Anyone," your voice pleading this time, "anyone at all?" #pause-long
-- › [ERR] No signal detected. #system #pause
+- > Searching #system #ticker #pause
 You hear nothing but the faint static noise over the speakers. Either something is jamming your signal, or there's nobody left to hear you.
--> lost_crew
+-> alone
 
+=== alone ===
+You're on your own.
 
-=== lost_crew ===
+Just you, a pack of freeze-dried rations, and the pod's board computer.
 
-Your fuel reserves are running low. Even if there was anywhere you wanted to navigate to, you won't get very far.
-* [Activate distress signal]
-  › Beacon activated. #system #pause   
-  › Broadcasting... #system #flash #pause-long
-- It feels almost peaceful, drifting through the cosmos. You imagine yourself becoming one with the stars, slowly dissolving into the constellations of the night sky. #pause
+// * "Status report[."]," you mutter in no particular direction.
+//   The panel overhead lights up.
+//   › Checking pod status... #system #pause-long
+// * "Run diagnostics[."]," you say curtly.
+//   One of the overhead screens comes to life.
+//   › Running system diagnostics... #system #pause-long
+// - › <font color="\#78d36c">[OK]</font> Hull Integrety #system
+//    › <font color="\#78d36c">[OK]</font> Life Support #system
+//    › <font color="\#78d36c">[OK]</font> Comms Array #system #pause
+
+// So far so good.
+You should be able to survive for at least a full cycle like this. Enough time for a rescue party to collect you. #pause-long
+That is, if they even know where to look.
+// This is deep, unexplored space. The chances of someone just stumbling onto your escape pod are neglectible. So are the odds of anyone doing a full sector sweep and noticing the remnants of your beloved ship.
+
+* Alone[]. With only the gentle humming of the air scrubbers to keep you company. #pause-long
+- Outside of your viewport, the remnants of your beloved ship drift past. A faint glow reminds you of the danger that still lingers. Invisible, but lethal to anyone who strays too close: radiation.
+You've seen what a faulty reactor can do to the human body. A burning one will do much worse. Best not to linger. 
+
+* [Leave the wreckage behind]
+   With one last, melachonic look, you set a course away from the wreckage. The pod's thrusters take you deeper into the darkness, leaving behind the only thing that still felt like home in this cold void.
+   -> deep_space
+* [Wait in silence...]
+   You don't know what you're up against, and you can't risk being detected.
+   You carefully switch off all auxiliary systems, leaving only life support running.
+   Afraid the vaccum outside might somehow still expose you, you wait in silence. #pause-long
+   Your eyelids feel heavy. #pause-long
+   You're exhausted.
+   * * [Rest]
+   - - You fall into a restless slumber, only to wake up by a faint beeping sound. The control panel is trying to get your attention. #pause-long
+   > Altitude Warning  #system #flash #pause-long
+   You blink slowly, not fully realising what's happening. But then you see it: a planet! Right below your feet. Its gravitational field must have pulled you closer while you were asleep.
+   * * [Course correction]
+   -> correct_course
+   * * [Take a closer look]
+        Looking down below, you try to make out what planet you're orbiting. It doesn't look familiar. But why would it? You're in uncharted space. Nothing ever looks familiar here.
+        You run a quick lifeform analysis. No toxic atmosphere, so you would be able to breathe normally, but there's no telling what else you might find on the surface. It's not a very promising destination.
+        Then again, the capsule you're currently inhabiting doesn't make for a long-term home either. The odds of being rescued are slim at best, so why not chance it?
+        You could be the first human to set foot on this new world. Live a peaceful life. Discover what the universe has to offer...
+        * * * [Escape its orbit]
+                It's a fleeting thought. Absurd, really. You'd not survive such a dangerous plan.
+               -> correct_course
+        * * * [Attempt to land]
+               You take a deep breath, and plot a course for a potential landing zone.
+               The escape pod, now effectively a landing pod, approaches the strange planet. You close your eyes as you enter its atmosphere. This is it.
+               -> planetfall
+
+=== correct_course ===
+With a few adjustments to the controls, you steer your pod away from the strange planet. Crashing on an alien world is not on your bucket list.
+The pod's thrusters take you deeper into the darkness of space. -> deep_space
+
+=== planetfall ===
+ON THE PLANET
+-> deep_space
+
+=== deep_space ===
+- Fuel is lower, now what?
+* [Send a distress signal]
+* [Move to better broadcast position]
+* [Travel further]
+
+- todo
+
+Your fuel reserves are running low. Even if there was anywhere you wanted to navigate to, you wouln't get very far.
+* [Activate distress signal] -> final_distress
+
+=== final_distress ===
+> Beacon activated. #system #pause
+> Broadcasting #system #flash #ticker #pause-long
+You close your eyes. It feels almost peaceful, drifting through the cosmos like this. You imagine yourself becoming one with the stars, slowly dissolving into the constellations of the night sky. #pause
 
 * [Wait]
-- Maybe someone will hear you. #pause
-Maybe help will come. # pause
+- Maybe someone will hear you. #pause-long
+Maybe help will come. #pause-long
 They must... right? #pause-long
 They must.
 
-- End of transmission #fin
+- [End of transmission] #fin
 -> END

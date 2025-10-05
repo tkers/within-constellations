@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,700;1,400&display=swap');
 /* @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap'); */
-@import url('https://fonts.googleapis.com/css2?family=Nova+Mono&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Nova+Mono&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Doto:wght@600&display=swap');
 
 body {
   background-color: #051716;
@@ -11,7 +12,7 @@ body {
   font-size: 18px;
   margin: 0;
   background-image: url('data:image/svg+xml;utf8,<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="2" height="2" fill="%230b1e1d"/></svg>');
-  background-position: 50% 50%;
+  background-position: 50% 0%;
 }
 
 header {
@@ -96,6 +97,7 @@ a.choice {
   a.choice {
     display: block;
     padding: 8px 16px;
+    margin: 8px 0;
     text-align: center;
   }
 }
@@ -127,12 +129,15 @@ a.choice.show {
 
 @keyframes pulse {
   0% {
+    color: #ffd07f;
     text-shadow: 0 0 4px #ef9700;
   }
   30% {
+    color: #ffe7bf;
     text-shadow: 0 0 12px #ef9700;
   }
   100% {
+    color: #ffd07f;
     text-shadow: 0 0 4px #ef9700;
   }
 }
@@ -141,7 +146,9 @@ p.system {
   /* color: #a57fff; */
   /* color: #ffda9b; */
   color: #ffd07f;
-  font-family: 'Nova Mono', monospace;
+  /* font-family: 'Nova Mono', monospace; */
+  font-family: 'Doto', monospace;
+
   font-size: smaller;
   text-transform: uppercase;
   margin: 0;
@@ -150,14 +157,16 @@ p.system {
 
 p.flash {
   color: #ffd07f;
-  animation: pulse 1.4s ease-in-out infinite;
+  animation: pulse 1.2s ease-in-out infinite;
 }
-section:not(:last-child) p.flash {
+section:not(:last-child) p.system {
+  color: #ffe1ae;
   animation: none;
 }
 
 p.fin {
-  color: #7c8f88;
+  /* color: #7c8f88; */
+  color: #44524f;
   font-style: italic;
   margin-top: 4rem;
   text-align: center;
